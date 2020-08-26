@@ -17,6 +17,7 @@ SRCREV = "aca95603f2c509826f2b1fee93559f2cd403a9ae"
 DEPENDS += "lzop-native bc-native"
 
 SRC_URI += "file://0001-uapi-Add-ion.h-to-userspace.patch"
+SRC_URI += "0002-ea-imx8-defconfig.patch"
 
 DEFAULT_PREFERENCE = "1"
 
