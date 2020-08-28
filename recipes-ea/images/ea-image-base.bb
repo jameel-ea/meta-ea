@@ -30,7 +30,7 @@ IMAGE_INSTALL = "\
    packagegroup-fsl-gstreamer1.0-full \
    murata-binaries \
    backporttool-linux \
-   wpa-supplicant-cyw \
+   cyw-supplicant \
    iperf3 \
    tslib \
    tslib-tests \
