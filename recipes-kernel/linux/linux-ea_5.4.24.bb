@@ -9,16 +9,14 @@ require recipes-kernel/linux/linux-imx.inc
 
 SRC_URI = "git://github.com/jameel-ea/linux-imx.git;protocol=git;branch=${SRCBRANCH}"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
+LIC_FILES_CHKSUM = "file://COPYING;md5=8d230ebff20b091119bfeca42c4c1fae4005019a"
 
 LOCALVERSION = "-2.1.0"
 SRCBRANCH = "ea_5.4.24"
 SRCREV = "df0a249015acb9cf0a4253a8342daa2066762372"
 DEPENDS += "lzop-native bc-native"
 
-SRC_URI += "file://0001-uapi-Add-ion.h-to-userspace.patch \
-            file://0002-ea-imx8-defconfig.patch \
-"
+SRC_URI += "file://0001-uapi-Add-ion.h-to-userspace.patch"
 
 DEFAULT_PREFERENCE = "1"
 
