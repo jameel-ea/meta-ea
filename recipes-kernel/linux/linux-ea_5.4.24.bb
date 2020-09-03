@@ -7,13 +7,13 @@ The kernel is based on the kernel provided by NXP."
 
 require recipes-kernel/linux/linux-imx.inc
 
-SRC_URI = "git://github.com/embeddedartists/linux-imx.git;protocol=git;branch=${SRCBRANCH}"
+SRC_URI = "git://github.com/jameel-ea/linux-imx.git;protocol=git;branch=${SRCBRANCH}"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 LOCALVERSION = "-2.1.0"
 SRCBRANCH = "ea_5.4.24"
-SRCREV = "aca95603f2c509826f2b1fee93559f2cd403a9ae"
+SRCREV = "df0a249015acb9cf0a4253a8342daa2066762372"
 DEPENDS += "lzop-native bc-native"
 
 SRC_URI += "file://0001-uapi-Add-ion.h-to-userspace.patch \
