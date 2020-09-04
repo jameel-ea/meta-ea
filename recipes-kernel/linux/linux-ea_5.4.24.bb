@@ -9,7 +9,7 @@ require recipes-kernel/linux/linux-imx.inc
 
 SRC_URI = "git://github.com/jameel-ea/linux-imx.git;protocol=git;branch=${SRCBRANCH}"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=8d230ebff20b091119bfeca42c4c1fae4005019a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 LOCALVERSION = "-2.1.0"
 SRCBRANCH = "ea_mu_5.4.24"
