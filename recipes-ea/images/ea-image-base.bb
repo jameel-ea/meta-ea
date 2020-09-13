@@ -31,7 +31,7 @@ IMAGE_INSTALL = "\
    murata-binaries \
    backporttool-linux \
    kernel-modules-pcie8997 \
-   kernel-modules-abcd1234 \
+   kernel-modules-sdio8997 \
    cyw-supplicant \
    iperf3 \
    tslib \
