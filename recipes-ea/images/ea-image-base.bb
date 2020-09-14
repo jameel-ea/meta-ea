@@ -32,6 +32,13 @@ IMAGE_INSTALL = "\
    backporttool-linux \
    kernel-modules-pcie8997 \
    kernel-modules-sdio8997 \
+   bluez5 \
+   bluez5-noinst-tools \
+   bluez5-obex \
+   openobex \
+   obexftp \
+   glibc-gconv-utf-16 \
+   glibc-utils \
    cyw-supplicant \
    iperf3 \
    tslib \
