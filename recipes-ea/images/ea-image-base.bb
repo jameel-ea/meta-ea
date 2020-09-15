@@ -31,6 +31,7 @@ IMAGE_INSTALL = "\
    murata-binaries \
    backporttool-linux \
    kernel-modules-pcie8997 \
+   linux-firmware-pcie8997 \
    kernel-modules-sdio8997 \
    bluez5 \
    bluez5-noinst-tools \
