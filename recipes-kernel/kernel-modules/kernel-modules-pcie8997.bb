@@ -35,11 +35,11 @@ do_compile_prepend () {
 
 do_install () {
    # install ko and configs to rootfs
-   install -d ${D}${datadir}/mrvl_wireless
-   cp -rf ${S}/bin_pcie8997 ${D}${datadir}/mrvl_wireless
+   install -d ${D}${datadir}/nxp_wireless
+   cp -rf ${S}/bin_pcie8997 ${D}${datadir}/nxp_wireless
 }
 
 
-FILES_${PN} = "${datadir}/mrvl_wireless"
+FILES_${PN} = "${datadir}/nxp_wireless"
 
 INSANE_SKIP_${PN} = "ldflags"

@@ -100,6 +100,16 @@ do_patch() {
 
 do_compile() {
 
+	if [ ${TARGET_ARCH} = "aarch64" ]; then
+		echo "VKJB-4:: In AARCH64"
+       		export ARCH=arm64
+    		export CROSS_COMPILE="${TARGET_PREFIX}"
+    	else
+		echo "VKJB-4:: In ARM"
+		export ARCH=arm
+		export CROSS_COMPILE=arm-poky-linux-gnueabi-
+    	fi
+
 	echo "Compiling"
 	if [ "$SDIO_FILE_EXISTS" = "yes" ]; then
 		echo "Compiling: murata-abcd"
