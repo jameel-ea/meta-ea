@@ -14,6 +14,7 @@ EXTRA_OEMAKE += " \
     KERNELDIR=${STAGING_KERNEL_BUILDDIR} \
 "
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SDIO_FILE_EXISTS="no"
 #SDIO Source directory <- Points to BSP directory
@@ -110,7 +111,42 @@ do_compile() {
 		export CROSS_COMPILE=arm-poky-linux-gnueabi-
     	fi
 
-	echo "Compiling"
+	#STEP-0: Set sdio source directory
+	SDIO_SOURCE_DIR="${S}/../../../../../.."
+	cd $SDIO_SOURCE_DIR
+	pwd
+	export SDIO_SOURCE_DIR=`pwd`
+	echo "VKJB DEBUG:: SDIO source directory $SDIO_SOURCE_DIR"
+
+	#STEP-1: Check for the presence of the SDIO Source file name
+ 	# Check for file size and md5sum
+	echo "FILE NAME: ${SDIO_FILE_NAME}"
+        if [ -e $SDIO_SOURCE_DIR/${SDIO_FILE_NAME} ]; then
+		echo "DEBUG: File ${SDIO_FILE_NAME} EXISTS in $SDIO_SOURCE_DIR"
+		filesize=$(stat --format=%s "$SDIO_SOURCE_DIR/${SDIO_FILE_NAME}")
+		echo "File Size: ${filesize}"
+		#file1_md5=$(md5sum -q "$SDIO_SOURCE_DIR/${SDIO_FILE_NAME}")
+		file1_md5=$(md5sum "$SDIO_SOURCE_DIR/${SDIO_FILE_NAME}" | cut -d " " -f1)
+		echo "MD5 SUM is : $file1_md5"
+
+		if [ "${file1_md5}" = "${sdio_md5_sum}" ] && [ "${filesize}" = "${sdio_file_size}" ]; then
+			echo "DEBUG: BOTH MD5SUM and file size MATCHES."
+			SDIO_FILE_EXISTS="yes"
+		else
+			echo "MD5SUM / File Size DOES NOT MATCH."
+			echo "with : md5 ${sdio_md5_sum}"
+			echo "with : size ${sdio_file_size}"
+		fi
+	else
+		echo "DEBUG: File ${SDIO_FILE_NAME} DOES NOT EXIST"
+        fi
+
+
+	echo "1: Compiling: ${SDIO_FILE_EXISTS}"
+
+	echo "2: Compiling: ${SDIO_FILE_EXISTS}"
+	echo "3: DEBUG:: ${file1_md5}  = ${sdio_md5_sum} ${filesize} = ${sdio_file_size}"
+
 	if [ "$SDIO_FILE_EXISTS" = "yes" ]; then
 		echo "Compiling: murata-abcd"
         	echo "Testing Make        Display:: ${MAKE}"
@@ -147,6 +183,39 @@ do_compile() {
 
 do_install () {
 	echo "Installing: "
+
+	#STEP-0: Set sdio source directory
+	SDIO_SOURCE_DIR="${S}/../../../../../.."
+	cd $SDIO_SOURCE_DIR
+	pwd
+	export SDIO_SOURCE_DIR=`pwd`
+	echo "VKJB DEBUG:: SDIO source directory $SDIO_SOURCE_DIR"
+
+	#STEP-1: Check for the presence of the SDIO Source file name
+ 	# Check for file size and md5sum
+	echo "FILE NAME: ${SDIO_FILE_NAME}"
+        if [ -e $SDIO_SOURCE_DIR/${SDIO_FILE_NAME} ]; then
+		echo "DEBUG: File ${SDIO_FILE_NAME} EXISTS in $SDIO_SOURCE_DIR"
+		filesize=$(stat --format=%s "$SDIO_SOURCE_DIR/${SDIO_FILE_NAME}")
+		echo "File Size: ${filesize}"
+		#file1_md5=$(md5sum -q "$SDIO_SOURCE_DIR/${SDIO_FILE_NAME}")
+		file1_md5=$(md5sum "$SDIO_SOURCE_DIR/${SDIO_FILE_NAME}" | cut -d " " -f1)
+		echo "MD5 SUM is : $file1_md5"
+
+		if [ "${file1_md5}" = "${sdio_md5_sum}" ] && [ "${filesize}" = "${sdio_file_size}" ]; then
+			echo "DEBUG: BOTH MD5SUM and file size MATCHES."
+			SDIO_FILE_EXISTS="yes"
+		else
+			echo "MD5SUM / File Size DOES NOT MATCH."
+			echo "with : md5 ${sdio_md5_sum}"
+			echo "with : size ${sdio_file_size}"
+		fi
+	else
+		echo "DEBUG: File ${SDIO_FILE_NAME} DOES NOT EXIST"
+        fi
+
+
+
 	if [ "$SDIO_FILE_EXISTS" = "yes" ]; then
    		# install ko and configs to rootfs
    		install -d ${D}${datadir}/nxp_wireless
@@ -166,5 +235,6 @@ do_install () {
 }
 
 FILES_${PN} = "${datadir}/nxp_wireless"
+FILES_${PN} += "${nonarch_base_libdir}/firmware/nxp"
 
 INSANE_SKIP_${PN} = "ldflags"
