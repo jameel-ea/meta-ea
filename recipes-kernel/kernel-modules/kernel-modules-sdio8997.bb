@@ -142,26 +142,7 @@ do_compile() {
         fi
 
 
-	echo "1: Compiling: ${SDIO_FILE_EXISTS}"
-
-	echo "2: Compiling: ${SDIO_FILE_EXISTS}"
-	echo "3: DEBUG:: ${file1_md5}  = ${sdio_md5_sum} ${filesize} = ${sdio_file_size}"
-
 	if [ "$SDIO_FILE_EXISTS" = "yes" ]; then
-		echo "Compiling: murata-abcd"
-        	echo "Testing Make        Display:: ${MAKE}"
-	        echo "Testing bindir      Display:: ${bindir}"
-	        echo "Testing base_libdir Display:: ${base_libdir}"
-        	echo "Testing sysconfdir  Display:: ${sysconfdir}"
-	        echo "Testing S  Display:: ${S}"
-        	echo "Testing B  Display:: ${B}"
-	        echo "Testing D  Display:: ${D}"
-        	echo "vkjb :: ${WORKDIR}"
-	        echo "PWD :: "
-        	pwd
-
-    		export ARCH=arm64
-    		export CROSS_COMPILE=aarch64-poky-linux-
 
 		# Change build folder to 8997 folder (wlan_src)
     		cd ${S}/${SDIO_FOLDER_NAME_EXTRACT}/wlan_src
@@ -229,8 +210,6 @@ do_install () {
     		install -m 0644 ${S}/FwImage/sd8997_bt_v4.bin ${D}${nonarch_base_libdir}/firmware/nxp
     		install -m 0644 ${S}/FwImage/sd8997_wlan_v4.bin ${D}${nonarch_base_libdir}/firmware/nxp
     		install -m 0644 ${S}/FwImage/sdsd8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/nxp
-
-
 	fi
 }
 
