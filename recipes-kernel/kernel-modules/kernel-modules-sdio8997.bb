@@ -28,6 +28,7 @@ SDIO_FOLDER_NAME_EXTRACT="SD-UAPSTA-BT-8997-U16-MMC-W16.68.10.p56-16.26.10.p56-C
 SRC_URI = " \
 	git://github.com/murata-wireless/cyw-bt-patch;protocol=http;branch=zeus-gamera;destsuffix=cyw-bt-patch;name=cyw-bt-patch \
         file://${SDIO_FILE_NAME} \
+        file://1YM_SDIO_Support.txt \
 	file://makefile.patch \
 "
 
@@ -163,7 +164,7 @@ do_compile() {
 
 
 do_install () {
-	echo "Installing: "
+	echo "DEBUG: Testing Installing: "
 
 	#STEP-0: Set sdio source directory
 	SDIO_SOURCE_DIR="${S}/../../../../../.."
@@ -196,6 +197,7 @@ do_install () {
         fi
 
 
+	echo "$$$$$$ DIR: ${S}/${SDIO_FOLDER_NAME}"
 
 	if [ "$SDIO_FILE_EXISTS" = "yes" ]; then
    		# install ko and configs to rootfs
@@ -210,6 +212,11 @@ do_install () {
     		install -m 0644 ${S}/FwImage/sd8997_bt_v4.bin ${D}${nonarch_base_libdir}/firmware/nxp
     		install -m 0644 ${S}/FwImage/sd8997_wlan_v4.bin ${D}${nonarch_base_libdir}/firmware/nxp
     		install -m 0644 ${S}/FwImage/sdsd8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/nxp
+	else
+		echo "$$$$$$ DIR:${SDIO_FOLDER_NAME}"
+		# install README file mentioning no SDIO driver
+		install -d ${D}${nonarch_base_libdir}/firmware/nxp
+		install -m 0777 ${S}/1YM_SDIO_Support.txt ${D}${nonarch_base_libdir}/firmware/nxp/1YM_SDIO_Support.txt
 	fi
 }
 
