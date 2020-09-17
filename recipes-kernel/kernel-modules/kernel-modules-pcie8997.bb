@@ -17,17 +17,14 @@ do_compile_prepend () {
     cd ${S}/mwifiex_8997
 
     if [ ${TARGET_ARCH} = "aarch64" ]; then
-	echo "VKJB-4:: In AARCH64"
+	echo "DEBUG:: In AARCH64"
        	export ARCH=arm64
     	export CROSS_COMPILE="${TARGET_PREFIX}"
     else
-	echo "VKJB-4:: In ARM"
+	echo "DEBUG:: In ARM"
 	export ARCH=arm
 	export CROSS_COMPILE=arm-poky-linux-gnueabi-
     fi
-
-    echo "VKJB-4: ARCH is ${TARGET_ARCH}"
-    echo "VKJB-4: CROSS_COMPILE is ${TARGET_PREFIX}"
 
     oe_runmake build
 }
